@@ -1,0 +1,41 @@
+from machine import Pin
+import time
+
+
+led = Pin(15, Pin.OUT)  # GPIO 15 för LED
+button = Pin(14, Pin.IN, Pin.PULL_UP)  # GPIO 14 för knapp med intern pull-up
+
+# Funktion som blinkar SOS mönster
+def send_sos(num_of_sos):
+    for _ in range(num_of_sos):
+        # 3 korta blink
+        for _ in range(3):
+            led.value(1)  # Tänd LED
+            time.sleep(0.2)  # Kort blink (200 ms)
+            led.value(0)  # Släck LED
+            time.sleep(0.2)
+        
+        # 3 långa blink
+        for _ in range(3):
+            led.value(1)  # Tänd LED
+            time.sleep(0.6)  # Lång blink (600 ms)
+            led.value(0)  # Släck LED
+            time.sleep(0.2)
+
+        # 3 korta blink igen
+        for _ in range(3):
+            led.value(1)  # Tänd LED
+            time.sleep(0.2)  # Kort blink (200 ms)
+            led.value(0)  # Släck LED
+            time.sleep(0.2)
+        
+        # Liten paus mellan SOS meddelanden
+        time.sleep(1)
+
+# Huvudloop
+while True:
+    if button.value() == 0:  # Kontrollera om knappen är nedtryckt (GPIO blir låg)
+        send_sos(1)  # Anropa send_sos funktion en gång
+    else:
+        led.value(0)  # Håll LED av när knappen inte trycks ned
+    time.sleep(0.1)  # Debounce för att undvika snabba knapptryckningar
