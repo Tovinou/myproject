@@ -124,8 +124,8 @@ def main():
     library = Library()
 
     # Skapa några objekt (böcker och tidskrifter)
-    book1 = Book("1984", "George Orwell", 1949, 328)
-    book2 = Book("The Catcher in the Rye", "J.D. Salinger", 1951, 277)
+    book1 = Book("1984", "George", 1949, 328)
+    book2 = Book("The Catcher in the Rye", "Rollings", 1951, 277)
     magazine1 = Magazine("National Geographic", "Various", 2023, 12)
 
     # Lägg till objekt till biblioteket
